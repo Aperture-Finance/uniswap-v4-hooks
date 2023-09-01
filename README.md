@@ -11,7 +11,7 @@ As a passive LP, I want to offer liquidity in a passive manner and have a fair s
 As a JIT LP, I want to provide liquidity in a JIT manner and I don't want to be penalized too much if I'm helping traders to reduce price impact.
 
 
-As a trader, I want to trade in a low price impact and greater liquidity environment.
+As a trader, I want to trade with low slippage.
 
 Acceptance Criteria:
 - Can balance and redistribute trading fees between different types of LPs.
@@ -21,9 +21,9 @@ Acceptance Criteria:
 ### Technical Discussion
 The core issue of JIT LP vs. other types of LP is how to distribute trading fees in a equitable manner. We are proposing two potential technical directions to kick things off:
 
-**Approach 1: Same-block fee redistribution**
+**Approach 1: Adaptive block distance fee redistribution**
 
-The high level idea is to identify JIT add/remove transactions and redistribute its captured fee in a equitable way within in-range LPs.
+The high level idea is to identify JIT add/remove transactions and redistribute its captured fee in a equitable way with other in-range LPs.
 
 With `beforeModifyPosition` and `afterModifyPosition` hooks, we will be able to keep track of when a position is added and removed. And we are also able to keep track of fees earned for such sequence of add/remove transactions. The detailed discussion of how accounting is done will be left to detailed engineering design doc later. Once we can calculate the associated JIT fees, a set of customizable knobs can be added to redistribute fees.
 
